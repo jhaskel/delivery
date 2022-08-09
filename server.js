@@ -23,7 +23,7 @@ app.set('port',port);
 
 usersRoutes(app);
 
-server.listen(3000,'192.168.100.230'|| 'localhost',function(){
+server.listen(3000, 'localhost',function(){
     console.log('Aplication de NodeJs ' +process.pid+' iniciada')
 });
 
