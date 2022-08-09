@@ -1,16 +1,26 @@
 const express = require('express');
 const app = express();
-const http = require('http');
-
-const logger = require('morgan');
-const cors = require('cors');
+const http = require("http");
 const debug = require('debug')('nodestr:server');
-const multer = require("multer");
+const logger = require('morgan');
+const cors = require("cors");
 
 
-const usersRoutes= require('./routes/userRoutes');
+
+const dotenv = require('dotenv');
+dotenv.config()
+
+app.use(express.json());
 
 
+
+
+/*
+rutas
+*/
+
+
+const users = require('./routes/userRoutes');
 
 
 const port = normalizePort( process.env.PORT || '3000');
@@ -19,14 +29,18 @@ const server= http.createServer(app);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-    extended:true
+    extended: true
 }));
 app.use(cors());
 app.disable('x-powered-by');
 
-app.set('port',port);
 
-usersRoutes(app);
+
+
+//CHAMANDO AS ROTAS
+
+users(app);
+
 
 process.env.TZ = "America/Sao_Paulo";
 server.listen(port);
@@ -41,7 +55,6 @@ app.use((err, req, res, next) => {
 });
 
 function normalizePort(val){
-
     const port = parseInt(val,10);
     if(isNaN(port)){
         return val;
@@ -91,5 +104,3 @@ module.exports = {
     app: app,
     server:server
 }
-
-
