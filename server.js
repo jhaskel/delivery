@@ -35,12 +35,9 @@ app.use(cors());
 app.disable('x-powered-by');
 
 
-
-
 //CHAMANDO AS ROTAS
 
 users(app);
-
 
 process.env.TZ = "America/Sao_Paulo";
 server.listen(port);
